@@ -49,7 +49,7 @@ public class PostgreSQLDAO implements IDAO, ConnectionInterface, Menu {
     private boolean connectionFlag = false;
 
     /**
-     *
+     * The value will determine if we can access the manu a functionalities depending on if the connection was established or not 
      */
     private boolean executionFlag = true;
 
