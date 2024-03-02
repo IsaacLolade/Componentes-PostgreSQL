@@ -9,11 +9,12 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- +PostgresSQLDAO class implements the logic
- * necessary to execute each action that users will be using
- * depending on their needs
- * interactions for {@link IDAO} interface methods.
- *
+ * MongoDB component.
+ * Interfaces implemented:
+ *  {@link IDAO} for data operations.
+ *  {@link ConnectionInterface} for database server connection management.
+ *  {@link Menu} for user related interactions.
+ * All implemented methods first check if the connection was successful checking a boolean variable so the user can't execute anything without calling the connection method first
  *
  * @author Isaac Lolade Kehinde Adekeye
  */
@@ -21,35 +22,51 @@ import java.util.regex.Pattern;
 public class PostgreSQLDAO implements IDAO, ConnectionInterface, Menu {
 
     // Terminal outputs and colors
+    /**
+     * BLACK_FONT -> Static and final {@link String} variable that stores ASCII code for black font color.
+     */
     static final String BLACK_FONT = "\u001B[30m";
+    /**
+     * GREEN_FONT -> Static and final {@link String} variable that stores ASCII code for green font color.
+     */
     static final String GREEN_FONT = "\u001B[32m";
+    /**
+     * WHITE_BG -> Static and final {@link String} variable that stores ASCII code for white background color.
+     */
     static final String WHITE_BG = "\u001B[47m";
+    /**
+     * RESET -> Static and final {@link String} variable that stores ASCII code to reset terminal colors.
+     */
     static final String RESET = "\u001B[0m";
+    /**
+     * USER_INPUT -> Static and final {@link String} variable that stores a simple prompt for the user when he has to introduce any data.
+     */
     static final String USER_INPUT = String.format("%s%s>%s ", BLACK_FONT, WHITE_BG, RESET);
 
     /**
-     * Regular expression to check if ip address introduced It's valid or not
+     * ipPattern -> {@link Pattern} variable that stores the IPv4 regular expression. Also allows the localhost IP.
      */
     private final Pattern ipPattern = Pattern.compile("(localhost)|(\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b)"); // Regular expression to identify if the user either localhost or ip address the right way
 
     /**
-     * Input reader for what the user introduces at the console
+     * isr -> {@link InputStreamReader} variable that will allow the user to insert data through terminal.
+     *
      */
     private final InputStreamReader isr = new InputStreamReader(System.in);
 
     /**
-     * Tool to get connected to the database
+     * conn -> {@link Connection} to get connected to the database
      */
     private Connection conn;
 
     /**
-     * Determine if the connection was established with the database
+     * connectionFlag -> Boolean variable that indicates whether the connection with the database has been established or not. Set to false by default.
      */
 
     private boolean connectionFlag = false;
 
     /**
-     * The value will determine if we can access the manu a functionalities depending on if the connection was established or not 
+     * connectionFlag -> Boolean variable for program execution. Set to true by default.
      */
     private boolean executionFlag = true;
 
@@ -61,7 +78,7 @@ public class PostgreSQLDAO implements IDAO, ConnectionInterface, Menu {
     @Override
     public List<Employee> findAllEmployees() {
 
-        if (this.connectionFlag == false) {
+        if (!this.connectionFlag) {
             System.out.println("ERROR, there's no connection to the Database. Please try using method connectDB() before trying any other thing");
         } else {
 
