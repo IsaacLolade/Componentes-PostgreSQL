@@ -3,9 +3,9 @@ package cesur.accesodatos.postgresql;
 import java.util.Objects;
 
 /**
- * Department class implements the logic
- * necessary to manipulate everything
- * consign in the Departments
+ * Department class represents a department in the system.
+ * It encapsulates information about a department, such as its unique identifier,
+ * name, and location.
  */
 public class Department {
 
@@ -71,34 +71,6 @@ public class Department {
         return location;
     }
 
-    // SETTERS //
-
-    /**
-     *Set the department number of the Department
-     *
-     * @param depno  The Department number to be set
-     */
-    public void setDepno(int depno) {
-        this.depno = depno;
-    }
-
-    /**
-     *Set the department name of the Department
-     *
-     * @param name  The Department name to be set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     *Set the department location of the Department
-     *
-     * @param location  The Department location to be set
-     */
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     // TO STRING //
     /**

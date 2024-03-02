@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * MongoDB component.
+ * Postgres component.
  * Interfaces implemented:
  *  {@link IDAO} for data operations.
  *  {@link ConnectionInterface} for database server connection management.
@@ -118,7 +118,7 @@ public class PostgreSQLDAO implements IDAO, ConnectionInterface, Menu {
                 PreparedStatement ps = this.conn.prepareStatement("SELECT * FROM empleado where empno = ?");  //  It performs the necessary consultation to obtain a specific Employee
                 Integer numero = Integer.parseInt(id.toString()); // It converts the id in case it's not an Integer
                 ps.setInt(1, numero);
-                ResultSet rs = ps.executeQuery();
+                ResultSet rs = ps.executeQuery(); // Through the query it will allow us to retrieve all the results inside this
 
                 while (rs.next()) {
                     return new Employee(rs.getInt("empno"), rs.getString("nombre"), rs.getString("puesto"), rs.getInt("depno")); // It returns the specific Employee
@@ -331,9 +331,6 @@ public class PostgreSQLDAO implements IDAO, ConnectionInterface, Menu {
      * Method to add an Employee to the database
      * @param department Object that we'll add to the parameter that was created early, from this we'll be extract the Name, ID and the Location
      */
-
-
-
     @Override
     public void addDepartment(Department department) {
         if (!this.connectionFlag) {
@@ -342,9 +339,9 @@ public class PostgreSQLDAO implements IDAO, ConnectionInterface, Menu {
 
             try {
                 PreparedStatement ps = this.conn.prepareStatement("INSERT INTO departamento values(?,?,?)"); //  It performs the necessary consultation to create a Department
-                ps.setInt(1, department.getDepno());
-                ps.setString(2, department.getName());
-                ps.setString(3, department.getLocation());
+                ps.setInt(1, department.getDepno()); // Set Department ID
+                ps.setString(2, department.getName()); // Set Department Name
+                ps.setString(3, department.getLocation()); // Set Department Location
                 ps.executeUpdate();
 
             } catch (SQLException e) {
@@ -472,12 +469,12 @@ public class PostgreSQLDAO implements IDAO, ConnectionInterface, Menu {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    employeeArrayList.add(new Employee(rs.getInt("empno"), rs.getString("nombre"), rs.getString("puesto"), rs.getInt("depno"))); // Adds the employees to the ArrayList employeeArrayList
+                    employeeArrayList.add(new Employee(rs.getInt("empno"), rs.getString("nombre"), rs.getString("puesto"), rs.getInt("depno"))); // Add the employees to the ArrayList employeeArrayList
                 }
                 ps.close();
                 rs.close();
 
-                return employeeArrayList;
+                return employeeArrayList; // return the list
             } catch (SQLException e) {
                 System.out.println("ERROR: SQLException error reported " + e.getMessage());
             } catch (NumberFormatException exception) {
