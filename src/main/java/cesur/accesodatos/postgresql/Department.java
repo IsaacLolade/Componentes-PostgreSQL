@@ -6,6 +6,8 @@ import java.util.Objects;
  * Department class represents a department in the system.
  * It encapsulates information about a department, such as its unique identifier,
  * name, and location.
+ *
+ *  @author Isaac Lolade Kehinde Adekeye
  */
 public class Department {
 
