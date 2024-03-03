@@ -72,6 +72,32 @@ public class Department {
     }
 
 
+    // SETTERS //
+
+    /**
+     *
+     * @param depno Set identification of the Department
+     */
+    public void setDepno(int depno) {
+        this.depno = depno;
+    }
+
+    /**
+     *
+     * @param name Set Name of the Department
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     *
+     * @param location Set location of the Department
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     // TO STRING //
     /**
      *
